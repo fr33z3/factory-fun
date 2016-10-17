@@ -1,6 +1,6 @@
 var factoryStorage = require('./src/factory-storage');
-var sequence = require('./sequence');
-var FactoryTrait = require('./factory-trait');
+var sequence = require('./src/sequence');
+var FactoryTrait = require('./src/factory-trait');
 var extend = require('extend');
 
 var Factory = function(modelClass) {
