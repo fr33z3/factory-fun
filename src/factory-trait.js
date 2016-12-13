@@ -1,25 +1,35 @@
-var FactoryTrait = function(fn) {
-  this.fieldFillers = {};
-  this._callbacks = { before: {}, after: {} };
-  fn(this);
-}
+class FactoryTrait {
+  constructor(fn) {
+    this.fieldFillers = {};
+    this.collbackCollection = { before: {}, after: {} };
+    fn(this);
+  }
 
-FactoryTrait.prototype.field = function(name, filler) {
-  this.fieldFillers[name] = filler
-}
+  field(name, filler) {
+    this.fieldFillers[name] = filler;
+  }
 
-FactoryTrait.prototype.before = function(actionName, callback) {
-  this._callbacks.before[actionName] = callback
-}
+  before(actionName, callback) {
+    this.collbackCollection.before[actionName] = callback;
+  }
 
-FactoryTrait.prototype.after = function(actionName, callback) {
-  this._callbacks.after[actionName] = callback
-}
+  after(actionName, callback) {
+    this.collbackCollection.after[actionName] = callback;
+  }
 
-FactoryTrait.prototype.forEach = function(callback) {
-  Object.keys(this.fieldFillers).forEach(function(name) {
-    callback(this.fieldFillers[name], name)
-  })
+  getCallback(type, actionName) {
+    return this.getCallbacks(type)[actionName];
+  }
+
+  getCallbacks(type) {
+    return this.collbackCollection[type];
+  }
+
+  forEach(callback) {
+    Object.keys(this.fieldFillers).forEach((name) => {
+      callback(this.fieldFillers[name], name);
+    });
+  }
 }
 
 module.exports = FactoryTrait;

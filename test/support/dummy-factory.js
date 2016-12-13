@@ -1,24 +1,25 @@
-var Factory = require('../../index.js');
-var DummyModel = require('./dummy-model');
-var sequence = Factory.sequence;
+const Factory = require('../../index.js');
+const DummyModel = require('./dummy-model');
 
-Factory.define('dummy', DummyModel, function() {})
+const sequence = Factory.sequence;
 
-Factory.define('dummy-with-fields', DummyModel, function(dummy) {
+Factory.define('dummy', DummyModel, () => {});
+
+Factory.define('dummy-with-fields', DummyModel, (dummy) => {
   dummy.field('name', 'Simple Name');
-  dummy.field('someInt', 3)
+  dummy.field('someInt', 3);
 
-  dummy.trait('some-trait', function(trait) {
+  dummy.trait('some-trait', (trait) => {
     trait.field('name', 'Simple Trait Name');
   });
 
-  dummy.trait('another-trait', function(trait) {
+  dummy.trait('another-trait', (trait) => {
     trait.field('someInt', 5);
-  })
-})
+  });
+});
 
-Factory.define('dummy-with-sequence', DummyModel, function(dummy) {
+Factory.define('dummy-with-sequence', DummyModel, (dummy) => {
   dummy.field('intSequence', sequence());
-  dummy.field('functionSequence', sequence(function(n) { return "some-" + n }));
+  dummy.field('functionSequence', sequence(n => `some-${n}`));
   dummy.field('circleSequence', sequence(['a', 'b', 'c']));
-})
+});

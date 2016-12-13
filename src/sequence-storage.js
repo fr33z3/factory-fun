@@ -1,19 +1,19 @@
-var SequenceStorage = function() {
-  this.reset();
-};
-
-SequenceStorage.prototype.next = function(name) {
-  if(!this.sequences[name]) {
-    this.sequences[name] = 0
+class SequenceStorage {
+  constructor() {
+    this.reset();
   }
 
-  this.sequences[name] = this.sequences[name] + 1;
-  return this.sequences[name];
-};
+  next(name) {
+    if (!this.sequences[name]) this.sequences[name] = 0;
 
-SequenceStorage.prototype.reset = function() {
-  this.sequences = {}
+    this.sequences[name] += 1;
+    return this.sequences[name];
+  }
+
+  reset() {
+    this.sequences = {};
+  }
 }
 
-var sequenceStorage = new SequenceStorage();
+const sequenceStorage = new SequenceStorage();
 module.exports = sequenceStorage;

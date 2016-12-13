@@ -1,19 +1,20 @@
-FactoryStorage = function() {
-  this.reset();
+class FactoryStorage {
+  constructor() {
+    this.reset();
+  }
+
+  store(name, factory) {
+    this.factories[name] = factory;
+  }
+
+  get(name) {
+    return this.factories[name];
+  }
+
+  reset() {
+    this.factories = {};
+  }
 }
 
-FactoryStorage.prototype.store = function(name, factory) {
-  this.factories[name] = factory;
-}
-
-FactoryStorage.prototype.get = function(name) {
-  return this.factories[name]
-}
-
-FactoryStorage.prototype.reset = function(name) {
-  this.factories = {}
-}
-
-var factoryStorage = new FactoryStorage();
-
+const factoryStorage = new FactoryStorage();
 module.exports = factoryStorage;
