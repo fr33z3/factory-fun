@@ -4,7 +4,9 @@
   "description": "Setup your nodejs factoreis with fun",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha"
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern static/js -- .",
+    "all-tests": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,17 @@
   },
   "homepage": "https://github.com/fr33z3/factory-fun#readme",
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
+    "eslint": "^3.12.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "mocha": "^3.1.2"
+  },
+  "dependencies": {
+    "extend": "^3.0.0"
   }
 }

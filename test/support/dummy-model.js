@@ -1,5 +1,4 @@
-var DummyModel = function() {
-
+class DummyModel {
 }
 
 DummyModel.modelName = 'DummyModel';
