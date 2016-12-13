@@ -5,8 +5,9 @@ const FactoryTrait = require('./src/factory-trait');
 const parseArgs = require('./src/parse-args');
 
 class Factory {
-  constructor(modelClass) {
+  constructor(factoryName, modelClass) {
     this.ModelClass = modelClass;
+    this.factoryName = factoryName;
     this.fieldFillers = {};
     this.traits = {};
     this.callbacks = { before: {}, after: {} };
@@ -84,7 +85,7 @@ class Factory {
   }
 
   static define(factoryName, modelClass, fn) {
-    const factory = new Factory(modelClass);
+    const factory = new Factory(factoryName, modelClass);
     fn(factory);
     factoryStorage.store(factoryName, factory);
   }
@@ -120,8 +121,8 @@ class Factory {
   }
 
   static sequence(builder) {
-    return ((modelClass, fieldName) =>
-      sequence(`${modelClass.modelName}-${fieldName}`, builder)
+    return ((factoryName, fieldName) =>
+      sequence(`${factoryName}-${fieldName}`, builder)
     );
   }
 }
